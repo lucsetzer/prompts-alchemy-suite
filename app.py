@@ -17,6 +17,14 @@ from PIL import Image
 import io
 import json
 
+# API Keys from environment
+API_KEYS = {
+    "prompt": os.getenv("PROMPT_WIZARD_API_KEY"),
+    "thumbnail": os.getenv("THUMBNAIL_WIZARD_API_KEY"),
+    "video": os.getenv("VIDEO_WIZARD_API_KEY"),
+    "hook": os.getenv("HOOK_WIZARD_API_KEY"),
+    "document": os.getenv("DOCUMENT_WIZARD_API_KEY"),
+}
 
 
 
@@ -449,8 +457,6 @@ if __name__ == "__main__":
 
 
 # ---------- DOCUMENT WIZARD -----------
-app = FastAPI()
-DEEPSEEK_KEY = os.getenv("DOCUMENT_WIZARD_API_KEY")
 
 # Add this debug endpoint to see the full layout
 @app.get("/debug-layout")
@@ -1547,7 +1553,7 @@ async def step6(
     return HTMLResponse(layout("Step 6: Enter Topic", content_html))
 
 # ========== PROCESS ==========
-@app.post("/process")
+@app.post("/document-wizard/process")
 async def process_hook(
     platform: str = Form(...),
     type: str = Form(...),
@@ -1556,6 +1562,8 @@ async def process_hook(
     tone: str = Form(...),
     topic: str = Form(...)
 ):
+    DEEPSEEK_KEY = os.getenv("DOCUMENT_WIZARD_API_KEY")
+    
     # Show loading page
     loading_content = f'''
     <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 0;">
@@ -1983,7 +1991,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from layout import layout
 
 app = FastAPI()
-DEEPSEEK_KEY = os.getenv("PROMPT_WIZARD_API_KEY")
+
 
 
 
@@ -2449,7 +2457,7 @@ async def step6(
     return HTMLResponse(layout("Step 6: Enter Prompt", content))
 
 # ========== PROCESS WITH LOADING BAR ==========
-@app.post("/process")
+@app.post("/prompt-wizard/process")
 async def process_prompt(
     goal: str = Form(...),
     audience: str = Form(...),
@@ -2458,6 +2466,8 @@ async def process_prompt(
     tone: str = Form(...),
     prompt: str = Form(...)
 ):
+    DEEPSEEK_KEY = os.getenv("PROMPT_WIZARD_API_KEY")
+    
     # Show loading page immediately
     loading_content = f'''
     <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 0;">
@@ -3767,7 +3777,7 @@ async def step6(
     return HTMLResponse(layout("Step 6: Video Details", content))
 
 # ========== PROCESS ==========
-@app.post("/process")
+@app.post("/thumbnail-wizard/process")
 async def process_video(
     platform: str = Form(...),
     type: str = Form(...),
@@ -3777,6 +3787,7 @@ async def process_video(
     video_url: str = Form(""),
     video_description: str = Form("")
 ):
+    DEEPSEEK_KEY = os.getenv("THUMBNAIL_WIZARD_API_KEY")
     # Show loading page
     loading_content = f'''
     <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 0;">
