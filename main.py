@@ -566,7 +566,17 @@ app.mount("/test-app", test_app)
 
 
 
-
+@app.get("/debug-current/{wizard_name}")
+async def debug_current(wizard_name: str):
+    """Debug what's actually accessible right now"""
+    return {
+        "test_urls": [
+            f"https://your-site.up.railway.app/{wizard_name}/",
+            f"https://your-site.up.railway.app/{wizard_name}/wizard",
+            f"https://your-site.up.railway.app/{wizard_name}/wizard/step2?goal=explain"
+        ],
+        "note": "Try these exact URLs with trailing slashes where shown"
+    }
 
 
 
