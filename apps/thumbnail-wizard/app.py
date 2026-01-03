@@ -8,6 +8,8 @@ from PIL import Image
 import io
 import json
 import requests
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from layout import layout
 from dotenv import load_dotenv
 
