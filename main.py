@@ -240,6 +240,56 @@ async def debug_wizard_internals():
 
 
 
+# ============================================
+# DIRECT MOUNT TEST (FIXED VERSION)
+# ============================================
+print("\n" + "=" * 60)
+print("🧪 DIRECT MOUNT TEST")
+print("=" * 60)
+
+try:
+    # Use importlib to handle hyphen in folder name
+    import importlib.util
+    import sys
+    
+    wizard_path = "apps/prompt-wizard/app.py"
+    
+    # Load the module
+    spec = importlib.util.spec_from_file_location("prompt_wizard_test", wizard_path)
+    wizard_module = importlib.util.module_from_spec(spec)
+    sys.modules["prompt_wizard_test"] = wizard_module
+    spec.loader.exec_module(wizard_module)
+    
+    print(f"✅ Prompt wizard module loaded")
+    print(f"   Has 'app' attribute? {hasattr(wizard_module, 'app')}")
+    
+    if hasattr(wizard_module, 'app'):
+        # Mount it at a test path
+        app.mount("/test-prompt", wizard_module.app)
+        print(f"   ✅ Mounted at /test-prompt")
+        
+        # Check for duplicate layout function
+        if hasattr(wizard_module, 'layout'):
+            print(f"   ⚠️  WARNING: Wizard has its own layout() function!")
+            print(f"   This will override the root layout. Delete it!")
+        else:
+            print(f"   ✅ Using root layout (good)")
+            
+    else:
+        print(f"   ❌ No 'app' found in module")
+        print(f"   Available attributes: {[a for a in dir(wizard_module) if not a.startswith('_')]}")
+        
+except Exception as e:
+    print(f"❌ Direct mount test FAILED: {e}")
+    import traceback
+    traceback.print_exc()
+
+print("=" * 60)
+
+
+
+
+
 if __name__ == "__main__":
     import uvicorn
     print("\n" + "=" * 60)
