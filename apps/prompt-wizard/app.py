@@ -667,10 +667,10 @@ DO NOT include explanations, notes, or markdown. Output ONLY the enhanced prompt
     </div>
     
     <div style="text-align: center; margin-top: 3rem;">
-        <a href="/wizard" role="button" style="margin-right: 1rem; background: {TURQUOISE}; border-color: {TURQUOISE};">
+        <a href="wizard" role="button" style="margin-right: 1rem; background: {TURQUOISE}; border-color: {TURQUOISE};">
             <i class="fas fa-hat-wizard"></i> Create Another Prompt
         </a>
-        <a href="/" role="button" style="background: #64748b; border-color: #64748b;">
+        <a href="" role="button" style="background: #64748b; border-color: #64748b;">
             <i class="fas fa-home"></i> Dashboard
         </a>
     </div>
