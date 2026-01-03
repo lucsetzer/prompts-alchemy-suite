@@ -44,7 +44,7 @@ async def home():
         </p>
         
         <div style="margin: 3rem 0;">
-            <a href="/wizard" role="button" style="padding: 1rem 2.5rem; font-size: 1.25rem;">
+            <a href="wizard" role="button" style="padding: 1rem 2.5rem; font-size: 1.25rem;">
                 <i class="fas fa-magic"></i> Start Hook Wizard
             </a>
         </div>
@@ -207,7 +207,7 @@ async def step2(platform: str = Query("tiktok")):
         </div>
         
         <div style="text-align: center; margin-top: 2rem;">
-            <a href="/wizard" role="button" class="secondary">Back</a>
+            <a href="wizard" role="button" class="secondary">Back</a>
         </div>
     </div>
     '''
@@ -867,7 +867,7 @@ Topic context: {topic}"""
     {hooks_html}
     
     <div style="text-align: center; margin-top: 3rem;">
-        <a href="/wizard" role="button" style="margin-right: 1rem; background: {TURQUOISE}; border-color: {TURQUOISE};">
+        <a href="wizard" role="button" style="margin-right: 1rem; background: {TURQUOISE}; border-color: {TURQUOISE};">
             <i class="fas fa-fish-hook"></i> Create More Hooks
         </a>
         <a href="/" role="button" style="background: #64748b; border-color: #64748b;">
