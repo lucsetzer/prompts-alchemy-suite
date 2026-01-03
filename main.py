@@ -319,6 +319,32 @@ async def debug_wizard_check():
 
 
 
+@app.get("/layout-check")
+async def layout_check():
+    """Check which wizards have duplicate layout functions"""
+    import os
+    
+    results = {}
+    for wizard in ["prompt-wizard", "thumbnail-wizard", "video-wizard", 
+                   "hook-wizard", "document-wizard", "home-page"]:
+        path = f"apps/{wizard}/app.py"
+        if os.path.exists(path):
+            with open(path, 'r') as f:
+                content = f.read()
+                has_def_layout = 'def layout(' in content
+                has_import_layout = 'from layout import layout' in content or 'import layout' in content
+                results[wizard] = {
+                    "has_own_layout": has_def_layout,
+                    "imports_root_layout": has_import_layout,
+                    "status": "❌ HAS DUPLICATE" if has_def_layout else "✅ OK"
+                }
+    
+    return results
+
+
+
+
+
 
 if __name__ == "__main__":
     import uvicorn
