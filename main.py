@@ -367,6 +367,27 @@ async def debug_loaded():
 
 
 
+# TEST: Force create a simple route at root level
+@app.get("/test-simple")
+async def test_simple():
+    return {"message": "FastAPI is working", "time": datetime.now().isoformat()}
+
+# Also override the default 404
+@app.exception_handler(404)
+async def custom_404(request, exc):
+    return JSONResponse(
+        status_code=404,
+        content={
+            "message": "Route not found",
+            "requested_path": request.url.path,
+            "available_routes": [route.path for route in app.routes if hasattr(route, 'path')]
+        }
+    )
+
+
+
+
+
 
 
 if __name__ == "__main__":
