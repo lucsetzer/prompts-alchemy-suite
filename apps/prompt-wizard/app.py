@@ -855,5 +855,17 @@ DO NOT include explanations, notes, or markdown. Output ONLY the enhanced prompt
     
     return HTMLResponse(layout("Result", result_content))
 
+
+# Direct mount test
+try:
+    from apps.prompt_wizard.app import app as prompt_app
+    app.mount("/test-prompt", prompt_app)
+    print("✅ Direct mount test successful")
+except Exception as e:
+    print(f"❌ Direct mount failed: {e}")
+
+
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
