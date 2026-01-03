@@ -4,6 +4,14 @@ from fastapi.responses import HTMLResponse
 import uvicorn
 import requests
 import re
+import sys
+import os
+
+# This tells Python to look in root folder
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Now this imports from ROOT layout.py
+from layout import layout
 
 app = FastAPI()
 DEEPSEEK_KEY = "sk-849662e0871841a5a4496e006311beb9"
@@ -594,7 +602,6 @@ async def process_document(
     
     return HTMLResponse(layout("Decoding...", loading_content))
 
-# ========== RESULT ==========
 # ========== RESULT ==========
 @app.get("/result")
 async def show_result(
