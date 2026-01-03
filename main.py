@@ -387,6 +387,32 @@ async def custom_404(request, exc):
 
 
 
+# MANUAL MOUNT TEST (temporary)
+print("\n=== MANUAL MOUNT TEST ===")
+
+# Test prompt-wizard
+try:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "manual_prompt", 
+        "apps/prompt-wizard/app.py"
+    )
+    manual_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(manual_module)
+    
+    if hasattr(manual_module, 'app'):
+        app.mount("/manual-test", manual_module.app)
+        print("✅ Manually mounted at /manual-test")
+        print(f"  Routes in manual app: {[r.path for r in manual_module.app.routes]}")
+    else:
+        print("❌ No 'app' in manual module")
+except Exception as e:
+    print(f"❌ Manual mount failed: {e}")
+
+
+
+
+
 
 
 
