@@ -6,6 +6,67 @@ def layout(title: str, content: str) -> str:
     <title>{title} | Thumbnail Wizard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    
+    
+        <!-- Navigation -->
+    <nav class="suite-nav">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <!-- Logo/Brand -->
+                <div>
+                    <a href="/" class="brand" style="text-decoration: none; font-size: 1.5rem;">
+                        <i class="fas fa-flask"></i> Prompts Alchemy
+                    </a>
+                </div>
+                
+                <!-- Links - All 6 pages -->
+                <div style="display: flex; gap: 1.5rem; align-items: center;">
+                    <!-- Home -->
+                    <a href="/" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    
+                    <!-- Wizard 1: Prompt -->
+                    <a href="/prompt-wizard" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-hat-wizard"></i> Prompt Wizard
+                    </a>
+                    
+                    <!-- Wizard 2: Thumbnail -->
+                    <a href="/thumbnail-wizard" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-image"></i> Thumbnail Wizard
+                    </a>
+                    
+                    <!-- Wizard 3: Video -->
+                    <a href="/video-wizard" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-video"></i> Video Wizard
+                    </a>
+                    
+                    <!-- Wizard 4: Hook -->
+                    <a href="/hook-wizard" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-fish"></i> Hook Wizard
+                    </a>
+                    
+                    <!-- Wizard 5: Document -->
+                    <a href="/document-wizard" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-file-contract"></i> Document Wizard
+                    </a>
+                    
+                    <!-- Pricing -->
+                    <a href="#pricing" style="color: #374151; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-tag"></i> Pricing
+                    </a>
+                    
+                    <!-- Get Started Button -->
+                    <a href="#pricing" role="button" style="background: var(--primary); color: white; padding: 0.5rem 1.5rem;">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    
     <style>
         :root {{
             --primary: #8b5cf6;
@@ -86,6 +147,60 @@ def layout(title: str, content: str) -> str:
             background: var(--primary);
             color: white;
         }}
+
+
+        /* Better Navbar Styling */
+.suite-nav {
+    background: white;
+    border-bottom: 2px solid #f3f4f6;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.suite-nav a {
+    transition: all 0.2s ease;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.suite-nav a:hover {
+    color: var(--primary) !important;
+}
+
+/* Active page indicator */
+.suite-nav a.active {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.suite-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .suite-nav > .container > div {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .suite-nav .brand {
+        font-size: 1.25rem;
+    }
+}
+
+
+        
         
         /* Result boxes */
         .result-box {{
