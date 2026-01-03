@@ -4,6 +4,14 @@ from fastapi.responses import HTMLResponse
 import uvicorn
 import requests
 import time
+import sys
+import os
+
+# This tells Python to look in root folder
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Now this imports from ROOT layout.py
+from layout import layout
 
 app = FastAPI()
 DEEPSEEK_KEY = "sk-8dadf46bd95c47f88e8cb1fb4cd1f89e"
