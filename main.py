@@ -448,6 +448,75 @@ except Exception as e:
 
 
 
+@app.get("/test-wizard-content/{wizard_name}")
+async def test_wizard_content(wizard_name: str):
+    """Test what a wizard actually returns"""
+    import importlib.util
+    import requests
+    
+    wizard_path = f"apps/{wizard_name}/app.py"
+    
+    if not os.path.exists(wizard_path):
+        return {"error": f"Wizard not found: {wizard_path}"}
+    
+    try:
+        # Load the wizard module
+        spec = importlib.util.spec_from_file_location("test_wizard", wizard_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        
+        # Check what the home route returns
+        if hasattr(module, 'app'):
+            # Get the first route (usually home)
+            routes = module.app.routes
+            first_route = None
+            for route in routes:
+                if hasattr(route, 'path') and route.path == "/":
+                    first_route = route
+                    break
+            
+            return {
+                "wizard": wizard_name,
+                "has_app": True,
+                "routes_count": len(routes),
+                "routes": [{"path": r.path, "methods": getattr(r, 'methods', [])} 
+                          for r in routes if hasattr(r, 'path')],
+                "first_route": first_route.path if first_route else None,
+                "module_attributes": [a for a in dir(module) if not a.startswith('_')]
+            }
+        else:
+            return {"error": "No app found in module"}
+            
+    except Exception as e:
+        return {"error": str(e), "traceback": traceback.format_exc()}
+
+
+
+
+
+@app.get("/debug-access/{wizard_name}")
+async def debug_access(wizard_name: str):
+    """Try to access a wizard directly through the mount"""
+    import http.client
+    import json
+    
+    # This simulates what a browser would see
+    test_path = f"/{wizard_name}" if wizard_name != "home-page" else "/"
+    
+    return {
+        "wizard": wizard_name,
+        "test_path": test_path,
+        "mount_point": f"https://your-site.up.railway.app{test_path}",
+        "note": "Visit the above URL to test"
+    }
+
+
+
+
+
+
+
+
 
 
 
