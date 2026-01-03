@@ -6,6 +6,14 @@ import requests
 import re
 from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(directory="templates")
+import sys
+import os
+
+# This tells Python to look in root folder
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Now this imports from ROOT layout.py
+from layout import layout
 
 app = FastAPI()
 DEEPSEEK_KEY = "sk-221a023bf3d245048184283d594e3334"  # Same key
