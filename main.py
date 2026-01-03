@@ -112,7 +112,7 @@ def load_home_page():
                 elif hasattr(home_module, 'layout'):
                     # Create a simple home page using their layout
                     def simple_home():
-                        from core.layout import layout
+                        from layout import layout
                         content = '''
                         <div style="text-align: center; padding: 4rem;">
                             <h1>Welcome to Prompts Alchemy</h1>
@@ -126,7 +126,7 @@ def load_home_page():
                 continue
     
     # Fallback home page
-    from core.layout import layout
+    from layout import layout
     def fallback_home():
         content = '''
         <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 0;">
