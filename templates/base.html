@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Prompts Alchemy</title>
+    <!-- Pico.css CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom styles -->
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR USING PICO.CSS CLASSES -->
+    <nav class="container-fluid navbar">
+        <ul>
+            <li><strong><i class="fas fa-flask"></i> Prompts Alchemy</strong></li>
+        </ul>
+        <ul>
+            <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+            <li>
+                <details role="list" dir="rtl">
+                    <summary aria-haspopup="listbox">Wizards</summary>
+                    <ul role="listbox">
+                        <li><a href="/prompt-wizard"><i class="fas fa-hat-wizard"></i> Prompt Wizard</a></li>
+                        <li><a href="/thumbnail-wizard"><i class="fas fa-image"></i> Thumbnail Wizard</a></li>
+                        <li><a href="/video-wizard"><i class="fas fa-video"></i> Video Wizard</a></li>
+                        <li><a href="/hook-wizard"><i class="fas fa-fish"></i> Hook Wizard</a></li>
+                        <li><a href="/document-wizard"><i class="fas fa-file-contract"></i> Document Wizard</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li><a href="#pricing"><i class="fas fa-tag"></i> Pricing</a></li>
+            <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
+            <li>
+                <a href="#pricing" role="button" class="outline">
+                    <i class="fas fa-rocket"></i> Get Started
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="container">
+        <hr>
+        <small>© 2024 Prompts Alchemy. All wizardry reserved.</small>
+    </footer>
+</body>
+</html>
