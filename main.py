@@ -319,27 +319,50 @@ async def debug_wizard_check():
 
 
 
+
+# ============================================
+# DEBUG ENDPOINTS
+# ============================================
+
 @app.get("/layout-check")
 async def layout_check():
     """Check which wizards have duplicate layout functions"""
     import os
     
     results = {}
-    for wizard in ["prompt-wizard", "thumbnail-wizard", "video-wizard", 
-                   "hook-wizard", "document-wizard", "home-page"]:
+    wizards_to_check = [
+        "prompt-wizard",
+        "thumbnail-wizard", 
+        "video-wizard",
+        "hook-wizard",
+        "document-wizard", 
+        "home-page"
+    ]
+    
+    for wizard in wizards_to_check:
         path = f"apps/{wizard}/app.py"
         if os.path.exists(path):
             with open(path, 'r') as f:
                 content = f.read()
                 has_def_layout = 'def layout(' in content
-                has_import_layout = 'from layout import layout' in content or 'import layout' in content
+                has_import_layout = 'from layout import layout' in content
                 results[wizard] = {
-                    "has_own_layout": has_def_layout,
+                    "has_own_layout_function": has_def_layout,
                     "imports_root_layout": has_import_layout,
-                    "status": "❌ HAS DUPLICATE" if has_def_layout else "✅ OK"
+                    "status": "❌ HAS DUPLICATE LAYOUT" if has_def_layout else "✅ OK"
                 }
+        else:
+            results[wizard] = {"error": "app.py not found"}
     
     return results
+
+@app.get("/debug-loaded")
+async def debug_loaded():
+    """Show which wizards are actually loaded"""
+    return {
+        "loaded_wizards": loaded_wizards,
+        "total": len(loaded_wizards)
+    }
 
 
 
