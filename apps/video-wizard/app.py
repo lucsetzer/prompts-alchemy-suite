@@ -4,6 +4,13 @@ from fastapi.responses import HTMLResponse
 import uvicorn
 import requests
 import os
+import sys
+
+# This tells Python to look in root folder
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Now this imports from ROOT layout.py
+from layout import layout
 
 app = FastAPI()
 # You'll need a different AI key for video analysis (GPT-4 Vision maybe)
