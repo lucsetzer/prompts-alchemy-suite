@@ -450,9 +450,7 @@ if __name__ == "__main__":
 
 # ---------- DOCUMENT WIZARD -----------
 app = FastAPI()
-DEEPSEEK_KEY = "sk-849662e0871841a5a4496e006311beb9"
-
-
+DEEPSEEK_KEY = os.getenv("DOCUMENT_WIZARD_API_KEY")
 
 # Add this debug endpoint to see the full layout
 @app.get("/debug-layout")
@@ -1064,8 +1062,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from layout import layout
 
 app = FastAPI()
-DEEPSEEK_KEY = "sk-221a023bf3d245048184283d594e3334"  # Same key
-
+DEEPSEEK_KEY = os.getenv("HOOK_WIZARD_API_KEY")
 # Add this debug endpoint to see the full layout
 @app.get("/debug-layout")
 async def debug_layout():
@@ -1986,7 +1983,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from layout import layout
 
 app = FastAPI()
-DEEPSEEK_KEY = "sk-8dadf46bd95c47f88e8cb1fb4cd1f89e"
+DEEPSEEK_KEY = os.getenv("PROMPT_WIZARD_API_KEY")
 
 
 
@@ -3268,7 +3265,7 @@ if __name__ == "__main__":
 # ---------- VIDEO WIZARD -----------
 app = FastAPI()
 # You'll need a different AI key for video analysis (GPT-4 Vision maybe)
-DEEPSEEK_KEY = "sk-849662e0871841a5a4496e006311beb9"  # Might need different model
+DEEPSEEK_KEY = os.getenv("VIDEO_WIZARD_API_KEY")  # Might need different model
 
 
 
