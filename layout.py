@@ -275,18 +275,7 @@ def layout(title: str, content: str) -> str:
         }}
     </style>
 </head>
-<body style="background: white;">
-<nav style="padding: 1rem 0; border-bottom: 1px solid #e5e7eb;">
-    <div class="container">
-        <a href="/" style="text-decoration: none; font-size: 1.25rem; font-weight: bold; color: var(--primary);">
-            <i class="fas fa-magic"></i> Thumbnail Wizard
-        </a>
-        <span style="float: right;">
-            <a href="/" style="margin-right: 1rem;">Home</a>
-            <a href="/wizard">Thumbnail Wizard</a>
-        </span>
-    </div>
-</nav>
+<body style="background: white;"
 
 <main class="container" style="padding: 2rem 0; min-height: 80vh;">
     {content}
