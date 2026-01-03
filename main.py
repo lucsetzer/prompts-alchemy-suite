@@ -289,6 +289,36 @@ print("=" * 60)
 
 
 
+@app.get("/debug/wizard-check")
+async def debug_wizard_check():
+    """Check the prompt wizard's status"""
+    import importlib.util
+    import os
+    
+    wizard_path = "apps/prompt-wizard/app.py"
+    
+    if not os.path.exists(wizard_path):
+        return {"error": f"File not found: {wizard_path}"}
+    
+    try:
+        spec = importlib.util.spec_from_file_location("debug_check", wizard_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        
+        return {
+            "wizard_exists": True,
+            "has_app": hasattr(module, 'app'),
+            "has_layout_function": hasattr(module, 'layout'),
+            "app_type": type(module.app).__name__ if hasattr(module, 'app') else None,
+            "all_attrs": [a for a in dir(module) if not a.startswith('_')]
+        }
+    except Exception as e:
+        return {"error": str(e), "traceback": traceback.format_exc()}
+
+
+
+
+
 
 if __name__ == "__main__":
     import uvicorn
